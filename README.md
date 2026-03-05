@@ -15,6 +15,24 @@ curl --request POST \
   --form list=foo
 ```
 
+
+```json
+{
+  "detail": [
+    {
+      "type": "list_type",
+      "loc": [
+        "body",
+        "list",
+        "list"
+      ],
+      "msg": "Input should be a valid list",
+      "input": "foo"
+    }
+  ]
+}
+```
+
 * Passes validation with multiple entries in list
 ```sh
 curl --request POST \
@@ -25,6 +43,16 @@ curl --request POST \
   --form list=foo2
 ```
 
+```json
+{
+  "type": "list",
+  "list": [
+    "foo",
+    "foo2"
+  ]
+}
+```
+
 * Passes validation when hitting an endpoint that doesn't use a union
 ```sh
 curl --request POST \
@@ -32,4 +60,13 @@ curl --request POST \
   --header 'content-type: multipart/form-data' \
   --form type=list \
   --form list=foo
+```
+
+```json
+{
+  "type": "list",
+  "list": [
+    "foo"
+  ]
+}
 ```
